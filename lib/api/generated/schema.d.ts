@@ -21,17 +21,64 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/health": {
+    "/api/events": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Health check with database status */
-        get: operations["getHealth"];
+        get: operations["listEvents"];
+        put?: never;
+        post: operations["createEvent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/events/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["getEventById"];
         put?: never;
         post?: never;
+        delete: operations["deleteEvent"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/events/{id}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["patchEventStatus"];
+        trace?: never;
+    };
+    "/api/auth/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["loginAdmin"];
         delete?: never;
         options?: never;
         head?: never;
@@ -46,16 +93,75 @@ export interface components {
             /** @example Event App API */
             message: string;
         };
-        HealthResponse: {
+        ErrorResponse: {
+            /** @description Machine-readable error code */
+            error: string;
+            /** @description Human-readable error message */
+            description: string;
+        };
+        LoginRequest: {
+            username: string;
+            password: string;
+        };
+        LoginResponse: {
+            token: string;
             /** @enum {string} */
-            status: "ok";
-            /** @enum {string} */
-            database: "connected" | "connecting" | "disconnected";
+            tokenType: "Bearer";
+        };
+        /** @enum {string} */
+        EventStatus: "draft" | "published" | "cancelled";
+        Event: {
+            _id: string;
+            title: string;
+            description?: string;
             /** Format: date-time */
-            timestamp: string;
+            date: string;
+            location?: string;
+            status: components["schemas"]["EventStatus"];
+            /** Format: date-time */
+            createdAt: string;
+        };
+        CreateEventRequest: {
+            title: string;
+            description?: string;
+            /** Format: date-time */
+            date: string;
+            location?: string;
+            status?: components["schemas"]["EventStatus"];
+        };
+        UpdateEventStatusRequest: {
+            status: components["schemas"]["EventStatus"];
         };
     };
-    responses: never;
+    responses: {
+        /** @description Invalid request parameters or body */
+        BadRequest: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description Requested resource was not found */
+        NotFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description Authentication failed or missing token */
+        Unauthorized: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+    };
     parameters: never;
     requestBodies: never;
     headers: never;
@@ -83,24 +189,97 @@ export interface operations {
             };
         };
     };
-    getHealth: {
+    listEvents: {
+        parameters: {
+            query?: {
+                status?: components["schemas"]["EventStatus"];
+                from?: string;
+                to?: string;
+                title?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
+    };
+    createEvent: {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateEventRequest"];
+            };
+        };
+        responses: never;
+    };
+    getEventById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
         requestBody?: never;
+        responses: never;
+    };
+    deleteEvent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
+    };
+    patchEventStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateEventStatusRequest"];
+            };
+        };
+        responses: never;
+    };
+    loginAdmin: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["LoginRequest"];
+            };
+        };
         responses: {
-            /** @description Service health */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["HealthResponse"];
+                    "application/json": components["schemas"]["LoginResponse"];
                 };
             };
+            401: components["responses"]["Unauthorized"];
         };
     };
 }

@@ -1,11 +1,6 @@
-/** Hand-written types mirroring openapi/openapi.yaml — regenerate with `npm run api:types`. */
+import type { components } from "./generated/schema";
 
-export type WelcomeResponse = {
-  message: string;
-};
-
-export type HealthResponse = {
-  status: "ok";
-  database: "connected" | "connecting" | "disconnected";
-  timestamp: string;
-};
+export type WelcomeResponse = components["schemas"]["WelcomeResponse"];
+export type LoginRequest = components["schemas"]["LoginRequest"];
+export type LoginResponse = components["schemas"]["LoginResponse"];
+export type ErrorResponse = components["schemas"]["ErrorResponse"];

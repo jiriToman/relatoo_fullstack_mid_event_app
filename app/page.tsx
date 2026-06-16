@@ -1,19 +1,16 @@
+import { AuthGate } from "@/components/auth/auth-gate";
+import { LogoutButton } from "@/components/auth/logout-button";
 import { api } from "@/lib/api";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   let welcome: string | null = null;
-  let health: Awaited<ReturnType<typeof api.getHealth>> | null = null;
   let error: string | null = null;
 
   try {
-    const [welcomeRes, healthRes] = await Promise.all([
-      api.getWelcome(),
-      api.getHealth(),
-    ]);
+    const welcomeRes = await api.getWelcome();
     welcome = welcomeRes.message;
-    health = healthRes;
   } catch (e) {
     error =
       e instanceof Error
@@ -22,45 +19,49 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-zinc-50 px-6 py-16 font-sans dark:bg-black">
-      <main className="w-full max-w-lg rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
-        <h1 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
-          Event App
-        </h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-          Next.js frontend connected to the Express REST API.
-        </p>
-
-        {error ? (
-          <div
-            role="alert"
-            className="mt-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 dark:border-red-900 dark:bg-red-950 dark:text-red-200"
-          >
-            {error}
+    <AuthGate>
+      <div className="flex flex-1 flex-col bg-relatoo-gray-light">
+        <header className="border-b border-relatoo-gray-light bg-white">
+          <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-relatoo-green-dark">
+                Event App
+              </p>
+              <h1 className="text-lg font-semibold text-relatoo-dark">
+                Administrace
+              </h1>
+            </div>
+            <LogoutButton />
           </div>
-        ) : (
-          <dl className="mt-6 space-y-3 text-sm">
-            <div className="flex justify-between gap-4">
-              <dt className="text-zinc-500">API</dt>
-              <dd className="font-medium text-zinc-900 dark:text-zinc-100">
-                {welcome}
-              </dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-zinc-500">Status</dt>
-              <dd className="font-medium text-zinc-900 dark:text-zinc-100">
-                {health?.status}
-              </dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-zinc-500">Database</dt>
-              <dd className="font-medium text-zinc-900 dark:text-zinc-100">
-                {health?.database}
-              </dd>
-            </div>
-          </dl>
-        )}
-      </main>
-    </div>
+        </header>
+
+        <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
+          <div className="rounded-xl border border-relatoo-gray-light bg-white p-8 shadow-sm">
+            <h2 className="text-xl font-semibold text-relatoo-dark">
+              Přehled systému
+            </h2>
+            <p className="mt-2 text-sm text-relatoo-gray">
+              Připojení k Express REST API.
+            </p>
+
+            {error ? (
+              <div
+                role="alert"
+                className="mt-6 rounded-[5px] border border-relatoo-error/30 bg-relatoo-error/10 px-4 py-3 text-sm text-relatoo-error"
+              >
+                {error}
+              </div>
+            ) : (
+              <dl className="mt-6 divide-y divide-relatoo-gray-light">
+                <div className="flex justify-between gap-4 py-3 text-sm">
+                  <dt className="text-relatoo-gray">API</dt>
+                  <dd className="font-medium text-relatoo-dark">{welcome}</dd>
+                </div>
+              </dl>
+            )}
+          </div>
+        </main>
+      </div>
+    </AuthGate>
   );
 }
