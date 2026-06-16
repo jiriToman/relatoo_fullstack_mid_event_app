@@ -1,8 +1,8 @@
 # Event App — Frontend
 
-Next.js + React + TypeScript admin UI for the Event App REST API.
+Next.js admin UI for the Event App REST API.
 
-**Backend:** [../https-github.com-jiriToman-relatoo_fullstack_mid_event_app_BE/README.md](../https-github.com-jiriToman-relatoo_fullstack_mid_event_app_BE/README.md) (Express, port 3000)
+**Backend:** [README](../https-github.com-jiriToman-relatoo_fullstack_mid_event_app_BE/README.md) · port `3000`
 
 ## Quick start
 
@@ -12,23 +12,35 @@ cp .env.example .env.local
 npm run dev
 ```
 
-App: [http://localhost:3001](http://localhost:3001) · Login: [/login](http://localhost:3001/login) (backend `ADMIN_USERNAME` / `ADMIN_PASSWORD`)
+Open [http://localhost:3001/login](http://localhost:3001/login) — credentials from backend `.env` (`ADMIN_USERNAME` / `ADMIN_PASSWORD`).
 
-Auth session expires after 15 minutes of inactivity.
+Session expires after 15 minutes of inactivity.
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Dashboard |
+| `/events` | Event list (filters, pagination, detail modal) |
+| `/events/new` | Create event |
+| `/login` | Admin login |
+
+Top nav (Přehled · Seznam událostí · Nová událost) is on dashboard and event list only.
 
 ## Scripts
 
-| Command | Purpose |
-|---------|---------|
-| `npm run dev` | Dev server (port 3001) |
-| `npm run build` | Production build |
-| `npm run api:types` | Regenerate types from backend `openapi/openapi.json` |
+```bash
+npm run dev          # port 3001
+npm run build
+npm run api:types    # sync types from backend openapi/openapi.json
+```
 
-## Layout
+
+## Structure
 
 ```
-app/                 # pages
-components/          # UI (auth, etc.)
-lib/api/             # REST client + generated types
-lib/strings/         # UI copy (common.json + pages/*.json)
+app/              routes
+components/       UI (auth, events, layout)
+lib/api/          REST client + OpenAPI types
+lib/strings/      UI copy (JSON)
 ```
