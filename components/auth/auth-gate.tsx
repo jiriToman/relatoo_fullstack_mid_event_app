@@ -16,7 +16,7 @@ type AuthGateProps = {
 
 export function AuthGate({ children }: AuthGateProps) {
   const router = useRouter();
-  const [ready, setReady] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -24,7 +24,7 @@ export function AuthGate({ children }: AuthGateProps) {
       return;
     }
 
-    setReady(true);
+    setIsReady(true);
 
     const activityEvents: Array<keyof WindowEventMap> = [
       "mousedown",
@@ -57,13 +57,19 @@ export function AuthGate({ children }: AuthGateProps) {
     };
   }, [router]);
 
-  if (!ready) {
-    return (
-      <div className="flex flex-1 items-center justify-center bg-relatoo-gray-light">
-        <p className="text-sm text-relatoo-gray">{commonStrings.loading}</p>
+  return (
+    <div className="relative flex flex-1 flex-col">
+      {!isReady && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-relatoo-gray-light">
+          <p className="text-sm text-relatoo-gray">{commonStrings.loading}</p>
+        </div>
+      )}
+      <div
+        className={isReady ? "flex flex-1 flex-col" : "invisible flex flex-1 flex-col"}
+        aria-hidden={!isReady}
+      >
+        {children}
       </div>
-    );
-  }
-
-  return <>{children}</>;
+    </div>
+  );
 }

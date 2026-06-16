@@ -3,7 +3,20 @@
     "systemOverviewTitle": "Přehled systému",
     "systemOverviewDescription": "Připojení k Express REST API."
   },
+  "components": {
+    "openApiList": {
+      "title": "OpenAPI endpointy",
+      "description": "seznam dostupných REST endpointů",
+      "swaggerLink": "Swagger UI",
+      "method": "Metoda",
+      "path": "Cesta",
+      "operationId": "Operation ID",
+      "tags": "Tagy",
+      "summary": "Popis"
+    }
+  },
   "errors": {
-    "apiUnavailable": "Could not reach the backend API. Is it running on port 3000?"
+    "apiUnavailable": "Could not reach the backend API. Is it running on port 3000?",
+    "openApiUnavailable": "Nepodařilo se načíst OpenAPI specifikaci."
   }
 }

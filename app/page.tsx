@@ -1,4 +1,5 @@
 import { AuthGate } from "@/components/auth/auth-gate";
+import { OpenApiSection } from "@/components/dashboard/openapi-section";
 import { AdminTopNav } from "@/components/layout/admin-top-nav";
 import { api } from "@/lib/api";
 import commonStrings from "@/lib/strings/common.json";
@@ -50,6 +51,8 @@ export default async function Home() {
               </dl>
             )}
           </div>
+
+          <OpenApiSection />
         </main>
       </div>
     </AuthGate>
