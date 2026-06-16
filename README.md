@@ -22,6 +22,8 @@ npm run dev
 
 Frontend runs at [http://localhost:3001](http://localhost:3001) (port 3001 avoids conflict with the backend on 3000).
 
+Login page: [http://localhost:3001/login](http://localhost:3001/login) — uses `POST /api/auth/login` on the backend (credentials from backend `.env`: `ADMIN_USERNAME` / `ADMIN_PASSWORD`).
+
 ## API contract (OpenAPI)
 
 The **backend owns the OpenAPI spec**. It is generated from route JSDoc annotations and auto-updated on every backend commit.

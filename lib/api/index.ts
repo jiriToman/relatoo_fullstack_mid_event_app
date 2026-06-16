@@ -1,11 +1,25 @@
 import { apiFetch } from "./client";
-import type { HealthResponse, WelcomeResponse } from "./types";
+import type {
+  LoginRequest,
+  LoginResponse,
+  WelcomeResponse,
+} from "./types";
 
 export { ApiError } from "./client";
-export type { HealthResponse, WelcomeResponse } from "./types";
+export type {
+  ErrorResponse,
+  LoginRequest,
+  LoginResponse,
+  WelcomeResponse,
+} from "./types";
 
 export const api = {
   getWelcome: () => apiFetch<WelcomeResponse>("/"),
 
-  getHealth: () => apiFetch<HealthResponse>("/health"),
+  login: (credentials: LoginRequest) =>
+    apiFetch<LoginResponse>("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    }),
 };
