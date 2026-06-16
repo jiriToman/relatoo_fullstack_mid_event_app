@@ -1,5 +1,6 @@
 import { apiFetch } from "./client";
 import type {
+  CreateEventRequest,
   Event,
   ListEventsFilters,
   LoginRequest,
@@ -10,6 +11,7 @@ import type {
 
 export { ApiError } from "./client";
 export type {
+  CreateEventRequest,
   ErrorResponse,
   Event,
   EventStatus,
@@ -86,5 +88,15 @@ export const api = {
     apiFetch<void>(`/api/events/${id}`, {
       method: "DELETE",
       headers: authHeaders(token),
+    }),
+
+  createEvent: (token: string, body: CreateEventRequest) =>
+    apiFetch<Event>("/api/events", {
+      method: "POST",
+      headers: {
+        ...authHeaders(token),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     }),
 };

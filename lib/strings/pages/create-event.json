@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "title": "Nová událost | Event App"
+  },
+  "page": {
+    "sectionLabel": "Event App",
+    "title": "Nová událost",
+    "description": "Vytvořte novou událost v systému."
+  },
+  "components": {
+    "createEventForm": {
+      "titleLabel": "Název",
+      "titlePlaceholder": "Název události",
+      "descriptionLabel": "Popis",
+      "descriptionPlaceholder": "Volitelný popis události",
+      "dateLabel": "Datum a čas",
+      "locationLabel": "Místo",
+      "locationPlaceholder": "Volitelné místo konání",
+      "statusLabel": "Stav",
+      "submit": "Vytvořit událost",
+      "submitting": "Vytvářím…",
+      "genericError": "Nepodařilo se vytvořit událost."
+    }
+  }
+}

@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 
-import { AdminPageHeader } from "@/components/layout/admin-page-header";
+import { AdminTopNav } from "@/components/layout/admin-top-nav";
 import { EventDetailModal } from "@/components/events/event-detail-modal";
 import { Alert } from "@/components/ui/alert";
 import { PageSizeSelect } from "@/components/ui/page-size-select";
@@ -35,18 +34,7 @@ export function EventsListPage() {
 
   return (
     <div className="flex flex-1 flex-col bg-relatoo-gray-light">
-      <AdminPageHeader
-        sectionLabel={eventsStrings.page.sectionLabel}
-        title={eventsStrings.page.title}
-        actions={
-          <Link
-            href="/"
-            className="rounded-[5px] border border-relatoo-gray-light px-4 py-2 text-sm font-medium text-relatoo-dark transition hover:border-relatoo-green hover:text-relatoo-green-dark"
-          >
-            {eventsStrings.page.backToDashboard}
-          </Link>
-        }
-      />
+      <AdminTopNav pageTitle={eventsStrings.page.title} />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10">
         <div className="rounded-xl border border-relatoo-gray-light bg-white p-8 shadow-sm">

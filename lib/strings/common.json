@@ -7,6 +7,7 @@
   "adminSection": "Administrace",
   "apiLabel": "API",
   "eventsList": "Seznam událostí",
+  "createEvent": "Nová událost",
   "dashboardOverview": "Přehled",
   "logout": "Odhlásit se",
   "loading": "Načítám…"
