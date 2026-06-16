@@ -3,6 +3,7 @@ import { LogoutButton } from "@/components/auth/logout-button";
 import { api } from "@/lib/api";
 import commonStrings from "@/lib/strings/common.json";
 import homeStrings from "@/lib/strings/pages/home.json";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -33,7 +34,15 @@ export default async function Home() {
                 {commonStrings.adminSection}
               </h1>
             </div>
-            <LogoutButton />
+            <div className="flex items-center gap-2">
+              <Link
+                href="/events"
+                className="rounded-[5px] border border-relatoo-gray-light px-4 py-2 text-sm font-medium text-relatoo-dark transition hover:border-relatoo-green hover:text-relatoo-green-dark"
+              >
+                {commonStrings.eventsList}
+              </Link>
+              <LogoutButton />
+            </div>
           </div>
         </header>
 

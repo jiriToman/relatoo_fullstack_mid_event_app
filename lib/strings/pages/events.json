@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "title": "Seznam událostí | Event App"
+  },
+  "page": {
+    "sectionLabel": "Event App",
+    "title": "Seznam událostí",
+    "description": "Přehled eventů s pagination.",
+    "itemsPerPageLabel": "Počet na stránku",
+    "empty": "Nebyla nalezena žádná událost.",
+    "previous": "Předchozí",
+    "next": "Další",
+    "page": "Stránka",
+    "of": "z",
+    "backToDashboard": "Zpět na přehled"
+  },
+  "table": {
+    "title": "Název",
+    "date": "Datum",
+    "status": "Stav",
+    "location": "Místo"
+  },
+  "status": {
+    "draft": "Koncept",
+    "published": "Publikováno",
+    "cancelled": "Zrušeno"
+  },
+  "errors": {
+    "loadFailed": "Nepodařilo se načíst seznam událostí."
+  }
+}

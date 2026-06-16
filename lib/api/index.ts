@@ -1,5 +1,6 @@
 import { apiFetch } from "./client";
 import type {
+  Event,
   LoginRequest,
   LoginResponse,
   WelcomeResponse,
@@ -8,6 +9,8 @@ import type {
 export { ApiError } from "./client";
 export type {
   ErrorResponse,
+  Event,
+  EventStatus,
   LoginRequest,
   LoginResponse,
   WelcomeResponse,
@@ -21,5 +24,12 @@ export const api = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
+    }),
+
+  listEvents: (token: string) =>
+    apiFetch<Event[]>("/api/events", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     }),
 };

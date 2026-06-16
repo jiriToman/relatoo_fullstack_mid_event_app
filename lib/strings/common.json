@@ -6,6 +6,8 @@
   "appName": "Event App",
   "adminSection": "Administrace",
   "apiLabel": "API",
+  "eventsList": "Seznam událostí",
+  "dashboardOverview": "Přehled",
   "logout": "Odhlásit se",
   "loading": "Načítám…"
 }
