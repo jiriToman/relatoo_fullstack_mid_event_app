@@ -18,7 +18,9 @@
     "title": "Název",
     "date": "Datum",
     "status": "Stav",
-    "location": "Místo"
+    "location": "Místo",
+    "actions": "Akce",
+    "detail": "Detail události"
   },
   "status": {
     "draft": "Koncept",
@@ -37,6 +39,24 @@
       "clear": "Vymazat filtry",
       "toDisabledHint": "Nejprve vyberte datum Od",
       "toInvalid": "Datum Do musí být stejné nebo pozdější než Od"
+    },
+    "eventDetailModal": {
+      "title": "Detail události",
+      "close": "Zavřít",
+      "description": "Popis",
+      "createdAt": "Vytvořeno",
+      "saveStatus": "Uložit stav",
+      "savingStatus": "Ukládám…",
+      "delete": "Smazat událost",
+      "confirmDelete": "Potvrdit smazání",
+      "cancelDelete": "Zrušit",
+      "deleting": "Mažu…",
+      "errors": {
+        "loadFailed": "Nepodařilo se načíst detail události.",
+        "updateFailed": "Nepodařilo se změnit stav události.",
+        "deleteFailed": "Nepodařilo se smazat událost.",
+        "unauthorized": "Nejste přihlášeni."
+      }
     }
   },
   "errors": {

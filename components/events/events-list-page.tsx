@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 import { AdminPageHeader } from "@/components/layout/admin-page-header";
+import { EventDetailModal } from "@/components/events/event-detail-modal";
 import { Alert } from "@/components/ui/alert";
 import { PageSizeSelect } from "@/components/ui/page-size-select";
 import { EventsFilters } from "@/components/events/events-filters";
@@ -13,6 +15,8 @@ import commonStrings from "@/lib/strings/common.json";
 import eventsStrings from "@/lib/strings/pages/events.json";
 
 export function EventsListPage() {
+  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
+
   const {
     eventsState,
     events,
@@ -24,6 +28,7 @@ export function EventsListPage() {
     setFilterForm,
     applyFilters,
     clearFilters,
+    reloadEvents,
     setPage,
     changePageSize,
   } = useEventsList();
@@ -82,7 +87,10 @@ export function EventsListPage() {
                 <p className="mt-6 text-sm text-relatoo-gray">{eventsStrings.page.empty}</p>
               ) : (
                 <>
-                  <EventsTable events={visibleEvents} />
+                  <EventsTable
+                    events={visibleEvents}
+                    onDetailClick={setSelectedEventId}
+                  />
                   <EventsPagination
                     page={page}
                     totalPages={totalPages}
@@ -95,6 +103,13 @@ export function EventsListPage() {
           )}
         </div>
       </main>
+
+      <EventDetailModal
+        eventId={selectedEventId}
+        onClose={() => setSelectedEventId(null)}
+        onUpdated={reloadEvents}
+        onDeleted={reloadEvents}
+      />
     </div>
   );
 }
