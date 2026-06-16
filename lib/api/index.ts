@@ -4,6 +4,7 @@ import type {
   ListEventsFilters,
   LoginRequest,
   LoginResponse,
+  UpdateEventStatusRequest,
   WelcomeResponse,
 } from "./types";
 
@@ -15,8 +16,13 @@ export type {
   ListEventsFilters,
   LoginRequest,
   LoginResponse,
+  UpdateEventStatusRequest,
   WelcomeResponse,
 } from "./types";
+
+function authHeaders(token: string): HeadersInit {
+  return { Authorization: `Bearer ${token}` };
+}
 
 function buildEventsQuery(filters?: ListEventsFilters): string {
   if (!filters) {
@@ -54,8 +60,31 @@ export const api = {
 
   listEvents: (token: string, filters?: ListEventsFilters) =>
     apiFetch<Event[]>(`/api/events${buildEventsQuery(filters)}`, {
+      headers: authHeaders(token),
+    }),
+
+  getEventById: (token: string, id: string) =>
+    apiFetch<Event>(`/api/events/${id}`, {
+      headers: authHeaders(token),
+    }),
+
+  updateEventStatus: (
+    token: string,
+    id: string,
+    body: UpdateEventStatusRequest,
+  ) =>
+    apiFetch<Event>(`/api/events/${id}/status`, {
+      method: "PATCH",
       headers: {
-        Authorization: `Bearer ${token}`,
+        ...authHeaders(token),
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify(body),
+    }),
+
+  deleteEvent: (token: string, id: string) =>
+    apiFetch<void>(`/api/events/${id}`, {
+      method: "DELETE",
+      headers: authHeaders(token),
     }),
 };

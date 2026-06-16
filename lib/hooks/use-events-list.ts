@@ -84,6 +84,10 @@ export function useEventsList() {
     setPage(1);
   }
 
+  function reloadEvents() {
+    loadEvents(appliedFilters);
+  }
+
   return {
     eventsState,
     events,
@@ -95,6 +99,7 @@ export function useEventsList() {
     setFilterForm,
     applyFilters,
     clearFilters,
+    reloadEvents,
     setPage,
     changePageSize,
   };

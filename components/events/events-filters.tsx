@@ -1,13 +1,9 @@
 import type { FormEvent } from "react";
 
-import type { EventStatus } from "@/lib/api";
-import {
-  type EventsFilterForm,
-  isDateRangeInvalid,
-} from "@/lib/events/filters";
+import { EventStatusSelect } from "@/components/events/event-status-select";
+import type { EventsFilterForm } from "@/lib/events/filters";
+import { isDateRangeInvalid } from "@/lib/events/filters";
 import eventsStrings from "@/lib/strings/pages/events.json";
-
-const EVENT_STATUSES: EventStatus[] = ["draft", "published", "cancelled"];
 
 type EventsFiltersProps = {
   value: EventsFilterForm;
@@ -62,26 +58,13 @@ export function EventsFilters({
       onSubmit={handleSubmit}
       className="mt-6 grid gap-4 rounded-[5px] border border-relatoo-gray-light bg-relatoo-green-pale/30 p-4 md:grid-cols-2 lg:grid-cols-4"
     >
-      <div>
-        <label htmlFor="event-status" className="mb-1.5 block text-sm font-medium text-relatoo-dark">
-          {strings.statusLabel}
-        </label>
-        <select
-          id="event-status"
-          value={value.status}
-          onChange={(event) =>
-            updateField("status", event.target.value as EventsFilterForm["status"])
-          }
-          className={inputClassName}
-        >
-          <option value="">{strings.statusAll}</option>
-          {EVENT_STATUSES.map((status) => (
-            <option key={status} value={status}>
-              {eventsStrings.status[status]}
-            </option>
-          ))}
-        </select>
-      </div>
+      <EventStatusSelect
+        id="event-status"
+        label={strings.statusLabel}
+        value={value.status}
+        onChange={(status) => updateField("status", status)}
+        includeAll
+      />
 
       <div>
         <label htmlFor="event-from" className="mb-1.5 block text-sm font-medium text-relatoo-dark">

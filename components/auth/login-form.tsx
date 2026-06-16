@@ -4,27 +4,12 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useState } from "react";
 
-import { ApiError, api } from "@/lib/api";
-import type { ErrorResponse } from "@/lib/api";
+import { api } from "@/lib/api";
+import { getErrorMessage } from "@/lib/api/get-error-message";
 import { setAuthToken } from "@/lib/auth/token";
 import loginStrings from "@/lib/strings/pages/login.json";
 
 const strings = loginStrings.components.loginForm;
-
-function getErrorMessage(error: unknown): string {
-  if (error instanceof ApiError) {
-    const body = error.body as ErrorResponse | undefined;
-    if (body?.description) {
-      return body.description;
-    }
-  }
-
-  if (error instanceof Error) {
-    return error.message;
-  }
-
-  return strings.genericError;
-}
 
 export function LoginForm() {
   const router = useRouter();
@@ -44,7 +29,7 @@ export function LoginForm() {
       router.push("/");
       router.refresh();
     } catch (submitError) {
-      setError(getErrorMessage(submitError));
+      setError(getErrorMessage(submitError, strings.genericError));
     } finally {
       setIsSubmitting(false);
     }
