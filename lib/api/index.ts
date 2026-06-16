@@ -1,4 +1,5 @@
 import { apiFetch } from "./client";
+import type { OpenApiSpec } from "@/lib/openapi/parse-paths";
 import type {
   CreateEventRequest,
   Event,
@@ -98,5 +99,10 @@ export const api = {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
+    }),
+
+  getOpenApiSpec: (token?: string) =>
+    apiFetch<OpenApiSpec>("/openapi.json", {
+      headers: token ? authHeaders(token) : undefined,
     }),
 };
