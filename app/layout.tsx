@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import commonStrings from "@/lib/strings/common.json";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -9,8 +10,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Event App | relatoo",
-  description: "Event App — admin přihlášení",
+  title: commonStrings.metadata.title,
+  description: commonStrings.metadata.description,
 };
 
 export default function RootLayout({

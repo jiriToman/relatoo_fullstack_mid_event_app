@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "title": "Přihlášení | Event App"
+  },
+  "components": {
+    "loginForm": {
+      "logoAlt": "relatoo",
+      "title": "Přihlášení",
+      "subtitle": "Přihlaste se do administrace Event App",
+      "usernameLabel": "Uživatelské jméno",
+      "usernamePlaceholder": "login",
+      "passwordLabel": "Heslo",
+      "passwordPlaceholder": "••••••••",
+      "submitIdle": "Přihlásit se",
+      "submitLoading": "Přihlašuji…",
+      "genericError": "Přihlášení se nezdařilo. Zkuste to prosím znovu.",
+      "footer": "CRM+ systém pro sportovní kluby a kulturní organizace"
+    }
+  }
+}

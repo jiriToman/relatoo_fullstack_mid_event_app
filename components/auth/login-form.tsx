@@ -7,6 +7,9 @@ import { type FormEvent, useState } from "react";
 import { ApiError, api } from "@/lib/api";
 import type { ErrorResponse } from "@/lib/api";
 import { setAuthToken } from "@/lib/auth/token";
+import loginStrings from "@/lib/strings/pages/login.json";
+
+const strings = loginStrings.components.loginForm;
 
 function getErrorMessage(error: unknown): string {
   if (error instanceof ApiError) {
@@ -20,7 +23,7 @@ function getErrorMessage(error: unknown): string {
     return error.message;
   }
 
-  return "Přihlášení se nezdařilo. Zkuste to prosím znovu.";
+  return strings.genericError;
 }
 
 export function LoginForm() {
@@ -53,7 +56,7 @@ export function LoginForm() {
         <div className="mb-8 flex justify-center">
           <Image
             src="/relatoo-logo.svg"
-            alt="relatoo"
+            alt={strings.logoAlt}
             width={161}
             height={46}
             priority
@@ -62,10 +65,10 @@ export function LoginForm() {
 
         <div className="rounded-xl bg-relatoo-dark-soft px-8 py-10 shadow-2xl ring-1 ring-white/10">
           <h1 className="text-center text-2xl font-semibold text-white">
-            Přihlášení
+            {strings.title}
           </h1>
           <p className="mt-2 text-center text-sm text-relatoo-gray-mid">
-            Přihlaste se do administrace Event App
+            {strings.subtitle}
           </p>
 
           <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
@@ -74,7 +77,7 @@ export function LoginForm() {
                 htmlFor="username"
                 className="mb-1.5 block text-sm font-medium text-white"
               >
-                Uživatelské jméno
+                {strings.usernameLabel}
               </label>
               <input
                 id="username"
@@ -85,7 +88,7 @@ export function LoginForm() {
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
                 className="w-full rounded-[5px] border border-white/10 bg-relatoo-dark px-4 py-3 text-sm text-white outline-none transition focus:border-relatoo-green focus:ring-2 focus:ring-relatoo-green/30"
-                placeholder="login"
+                placeholder={strings.usernamePlaceholder}
               />
             </div>
 
@@ -94,7 +97,7 @@ export function LoginForm() {
                 htmlFor="password"
                 className="mb-1.5 block text-sm font-medium text-white"
               >
-                Heslo
+                {strings.passwordLabel}
               </label>
               <input
                 id="password"
@@ -105,7 +108,7 @@ export function LoginForm() {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 className="w-full rounded-[5px] border border-white/10 bg-relatoo-dark px-4 py-3 text-sm text-white outline-none transition focus:border-relatoo-green focus:ring-2 focus:ring-relatoo-green/30"
-                placeholder="••••••••"
+                placeholder={strings.passwordPlaceholder}
               />
             </div>
 
@@ -123,13 +126,13 @@ export function LoginForm() {
               disabled={isSubmitting}
               className="w-full rounded-[5px] bg-relatoo-green px-4 py-3 text-sm font-semibold text-relatoo-dark transition hover:bg-relatoo-green-hover disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSubmitting ? "Přihlašuji…" : "Přihlásit se"}
+              {isSubmitting ? strings.submitLoading : strings.submitIdle}
             </button>
           </form>
         </div>
 
         <p className="mt-6 text-center text-xs text-relatoo-gray">
-          CRM+ systém pro sportovní kluby a kulturní organizace
+          {strings.footer}
         </p>
       </div>
     </div>

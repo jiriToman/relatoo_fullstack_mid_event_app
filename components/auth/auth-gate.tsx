@@ -8,6 +8,7 @@ import {
   isAuthenticated,
   touchAuthActivity,
 } from "@/lib/auth/token";
+import commonStrings from "@/lib/strings/common.json";
 
 type AuthGateProps = {
   children: ReactNode;
@@ -59,7 +60,7 @@ export function AuthGate({ children }: AuthGateProps) {
   if (!ready) {
     return (
       <div className="flex flex-1 items-center justify-center bg-relatoo-gray-light">
-        <p className="text-sm text-relatoo-gray">Načítám…</p>
+        <p className="text-sm text-relatoo-gray">{commonStrings.loading}</p>
       </div>
     );
   }
