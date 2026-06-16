@@ -1,49 +1,34 @@
 # Event App — Frontend
 
-React + Next.js + TypeScript frontend for the Event App.
+Next.js + React + TypeScript admin UI for the Event App REST API.
 
-## Prerequisites
+**Backend:** [../https-github.com-jiriToman-relatoo_fullstack_mid_event_app_BE/README.md](../https-github.com-jiriToman-relatoo_fullstack_mid_event_app_BE/README.md) (Express, port 3000)
 
-- [Node.js](https://nodejs.org/) (v20+)
-- Backend API running at [http://localhost:3000](http://localhost:3000) — see the [backend README](../https-github.com-jiriToman-relatoo_fullstack_mid_event_app_BE/README.md)
-
-## Setup
+## Quick start
 
 ```bash
 npm install
 cp .env.example .env.local
-```
-
-## Development
-
-```bash
 npm run dev
 ```
 
-Frontend runs at [http://localhost:3001](http://localhost:3001) (port 3001 avoids conflict with the backend on 3000).
+App: [http://localhost:3001](http://localhost:3001) · Login: [/login](http://localhost:3001/login) (backend `ADMIN_USERNAME` / `ADMIN_PASSWORD`)
 
-Login page: [http://localhost:3001/login](http://localhost:3001/login) — uses `POST /api/auth/login` on the backend (credentials from backend `.env`: `ADMIN_USERNAME` / `ADMIN_PASSWORD`).
+Auth session expires after 15 minutes of inactivity.
 
-## API contract (OpenAPI)
+## Scripts
 
-The **backend owns the OpenAPI spec**. It is generated from route JSDoc annotations and auto-updated on every backend commit.
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Dev server (port 3001) |
+| `npm run build` | Production build |
+| `npm run api:types` | Regenerate types from backend `openapi/openapi.json` |
 
-| Piece | Location |
-|-------|----------|
-| Source of truth | Backend `openapi/openapi.json` (generated) |
-| Live spec | [http://localhost:3000/openapi.json](http://localhost:3000/openapi.json) |
-| Swagger UI | [http://localhost:3000/api-docs](http://localhost:3000/api-docs) |
-| Frontend types | `lib/api/generated/schema.d.ts` |
-
-Regenerate frontend types after backend API changes:
-
-```bash
-npm run api:types
-```
-
-## Project structure
+## Layout
 
 ```
-app/              # Next.js App Router pages
-lib/api/          # API client & types
+app/                 # pages
+components/          # UI (auth, etc.)
+lib/api/             # REST client + generated types
+lib/strings/         # UI copy (common.json + pages/*.json)
 ```
