@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AdminPageHeader } from "@/components/layout/admin-page-header";
 import { Alert } from "@/components/ui/alert";
 import { PageSizeSelect } from "@/components/ui/page-size-select";
+import { EventsFilters } from "@/components/events/events-filters";
 import { EventsPagination } from "@/components/events/events-pagination";
 import { EventsTable } from "@/components/events/events-table";
 import { EVENT_PAGE_SIZES, useEventsList } from "@/lib/hooks/use-events-list";
@@ -19,6 +20,10 @@ export function EventsListPage() {
     pageSize,
     page,
     totalPages,
+    filterForm,
+    setFilterForm,
+    applyFilters,
+    clearFilters,
     setPage,
     changePageSize,
   } = useEventsList();
@@ -57,6 +62,13 @@ export function EventsListPage() {
               onChange={changePageSize}
             />
           </div>
+
+          <EventsFilters
+            value={filterForm}
+            onChange={setFilterForm}
+            onApply={applyFilters}
+            onClear={clearFilters}
+          />
 
           {eventsState.type === "loading" && (
             <p className="mt-6 text-sm text-relatoo-gray">{commonStrings.loading}</p>

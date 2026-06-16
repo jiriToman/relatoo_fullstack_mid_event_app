@@ -5,7 +5,7 @@
   "page": {
     "sectionLabel": "Event App",
     "title": "Seznam událostí",
-    "description": "Přehled eventů s pagination.",
+    "description": "Přehled eventů s filtrováním a pagination.",
     "itemsPerPageLabel": "Počet na stránku",
     "empty": "Nebyla nalezena žádná událost.",
     "previous": "Předchozí",
@@ -24,6 +24,20 @@
     "draft": "Koncept",
     "published": "Publikováno",
     "cancelled": "Zrušeno"
+  },
+  "components": {
+    "filters": {
+      "statusLabel": "Stav",
+      "statusAll": "Všechny stavy",
+      "fromLabel": "Od",
+      "toLabel": "Do",
+      "titleLabel": "Název",
+      "titlePlaceholder": "Hledat podle názvu…",
+      "apply": "Filtrovat",
+      "clear": "Vymazat filtry",
+      "toDisabledHint": "Nejprve vyberte datum Od",
+      "toInvalid": "Datum Do musí být stejné nebo pozdější než Od"
+    }
   },
   "errors": {
     "loadFailed": "Nepodařilo se načíst seznam událostí."
