@@ -8,6 +8,7 @@ export type Event = components["schemas"]["Event"];
 export type EventStatus = components["schemas"]["EventStatus"];
 export type UpdateEventStatusRequest =
   components["schemas"]["UpdateEventStatusRequest"];
+export type CreateEventRequest = components["schemas"]["CreateEventRequest"];
 
 export type ListEventsFilters = NonNullable<
   operations["listEvents"]["parameters"]["query"]
