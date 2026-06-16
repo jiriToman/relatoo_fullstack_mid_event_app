@@ -1,6 +1,8 @@
 import { AuthGate } from "@/components/auth/auth-gate";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { api } from "@/lib/api";
+import commonStrings from "@/lib/strings/common.json";
+import homeStrings from "@/lib/strings/pages/home.json";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +17,7 @@ export default async function Home() {
     error =
       e instanceof Error
         ? e.message
-        : "Could not reach the backend API. Is it running on port 3000?";
+        : homeStrings.errors.apiUnavailable;
   }
 
   return (
@@ -25,10 +27,10 @@ export default async function Home() {
           <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-relatoo-green-dark">
-                Event App
+                {commonStrings.appName}
               </p>
               <h1 className="text-lg font-semibold text-relatoo-dark">
-                Administrace
+                {commonStrings.adminSection}
               </h1>
             </div>
             <LogoutButton />
@@ -38,10 +40,10 @@ export default async function Home() {
         <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
           <div className="rounded-xl border border-relatoo-gray-light bg-white p-8 shadow-sm">
             <h2 className="text-xl font-semibold text-relatoo-dark">
-              Přehled systému
+              {homeStrings.page.systemOverviewTitle}
             </h2>
             <p className="mt-2 text-sm text-relatoo-gray">
-              Připojení k Express REST API.
+              {homeStrings.page.systemOverviewDescription}
             </p>
 
             {error ? (
@@ -54,7 +56,7 @@ export default async function Home() {
             ) : (
               <dl className="mt-6 divide-y divide-relatoo-gray-light">
                 <div className="flex justify-between gap-4 py-3 text-sm">
-                  <dt className="text-relatoo-gray">API</dt>
+                  <dt className="text-relatoo-gray">{commonStrings.apiLabel}</dt>
                   <dd className="font-medium text-relatoo-dark">{welcome}</dd>
                 </div>
               </dl>

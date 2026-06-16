@@ -1,0 +1,9 @@
+{
+  "page": {
+    "systemOverviewTitle": "Přehled systému",
+    "systemOverviewDescription": "Připojení k Express REST API."
+  },
+  "errors": {
+    "apiUnavailable": "Could not reach the backend API. Is it running on port 3000?"
+  }
+}

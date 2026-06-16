@@ -1,0 +1,11 @@
+{
+  "metadata": {
+    "title": "Event App | relatoo",
+    "description": "Event App — admin přihlášení"
+  },
+  "appName": "Event App",
+  "adminSection": "Administrace",
+  "apiLabel": "API",
+  "logout": "Odhlásit se",
+  "loading": "Načítám…"
+}
